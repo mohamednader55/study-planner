@@ -51,11 +51,18 @@ const App = (() => {
     }
     Storage.setLastOpen(today);
 
-    // Get or generate today's tasks
+    // Get today's tasks — regenerate if none exist but subjects do
     let tasks = Storage.getTasksForDate(today);
-    if (tasks.length === 0 && subjects.length > 0) {
-      tasks = Scheduler.generateDailyPlan(subjects);
-      Storage.saveTasksForDate(today, tasks);
+
+    if (subjects.length > 0) {
+      // Always regenerate if saved tasks don't match current subjects
+      const savedSubjectIds = [...new Set(tasks.map(t => t.subjectId))].sort().join(',');
+      const currentSubjectIds = subjects.map(s => s.id).sort().join(',');
+
+      if (tasks.length === 0 || savedSubjectIds !== currentSubjectIds) {
+        tasks = Scheduler.generateDailyPlan(subjects);
+        Storage.saveTasksForDate(today, tasks);
+      }
     }
 
     UI.renderTaskCards(tasks);
