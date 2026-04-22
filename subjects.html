@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyPlanner — Subjects</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-brain"></i></span>
+      <span class="logo-text">Study<span>Planner</span></span>
+    </div>
+    <nav>
+      <a href="index.html" class="nav-link">
+        <i class="fas fa-calendar-day"></i> Today's Plan
+      </a>
+      <a href="subjects.html" class="nav-link active">
+        <i class="fas fa-book-open"></i> Subjects
+      </a>
+      <a href="progress.html" class="nav-link">
+        <i class="fas fa-chart-line"></i> Progress
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="date-display" id="sidebarDate"></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <header class="page-header">
+      <div>
+        <p class="page-label">Manage</p>
+        <h1 class="page-title">Subjects</h1>
+      </div>
+      <button class="btn btn-primary" id="openModalBtn">
+        <i class="fas fa-plus"></i> Add Subject
+      </button>
+    </header>
+
+    <!-- Subject cards -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon"><i class="fas fa-book"></i></div>
+      <h2>No subjects added</h2>
+      <p>Add your first subject to get started with your study plan.</p>
+      <button class="btn btn-primary" id="openModalBtn2">
+        <i class="fas fa-plus"></i> Add Subject
+      </button>
+    </div>
+
+    <div class="subject-grid" id="subjectGrid" style="display:none"></div>
+
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="subjectModal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Subject</h2>
+        <button class="modal-close" id="closeModalBtn"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="form-group">
+        <label>Subject Name</label>
+        <input type="text" id="subjectName" placeholder="e.g. Mathematics" maxlength="40"/>
+      </div>
+
+      <div class="form-group">
+        <label>Exam Date</label>
+        <input type="date" id="examDate"/>
+      </div>
+
+      <div class="form-group">
+        <label>Difficulty <span class="difficulty-val" id="difficultyVal">3</span> / 5</label>
+        <input type="range" id="difficulty" min="1" max="5" value="3" class="range-input"/>
+        <div class="range-labels">
+          <span>Easy</span><span>Medium</span><span>Hard</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Daily Study Goal (hours)</label>
+        <input type="number" id="dailyHours" min="0.5" max="8" step="0.5" value="2" placeholder="e.g. 2"/>
+      </div>
+
+      <div class="form-group">
+        <label>Color Tag</label>
+        <div class="color-picker" id="colorPicker">
+          <div class="color-dot selected" data-color="#a855f7" style="background:#a855f7"></div>
+          <div class="color-dot" data-color="#3b82f6" style="background:#3b82f6"></div>
+          <div class="color-dot" data-color="#10b981" style="background:#10b981"></div>
+          <div class="color-dot" data-color="#f59e0b" style="background:#f59e0b"></div>
+          <div class="color-dot" data-color="#ef4444" style="background:#ef4444"></div>
+          <div class="color-dot" data-color="#ec4899" style="background:#ec4899"></div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="cancelBtn">Cancel</button>
+        <button class="btn btn-primary" id="saveSubjectBtn">Save Subject</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/scheduler.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
